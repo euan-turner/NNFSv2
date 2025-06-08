@@ -84,8 +84,8 @@ namespace tensor {
     assert(_cols == other._rows && "First matrix columns must equal second matrix rows for multiplication");
     Matrix result(_rows, other._cols);
     for (int i = 0; i < _rows; ++i) {
-      for (int j = 0; j < other._cols; ++j) {
-        for (int k = 0; k < _cols; ++k) {
+      for (int k = 0; k < _cols; ++k) {
+        for (int j = 0; j < other._cols; ++j) {
           result(i, j) += (*this)(i, k) * other(k, j);
         }
       }
