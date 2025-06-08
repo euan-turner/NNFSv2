@@ -1,5 +1,5 @@
 #include <cassert>
-#include "tensor/matrix.h"
+#include "tensor/matrix.hpp"
 #include <stdexcept>
 
 namespace tensor {
@@ -81,7 +81,16 @@ namespace tensor {
   }
 
   Matrix Matrix::matMul(const Matrix& other) const {
-    throw std::runtime_error("Matrix multiplication not implemented");
+    assert(_cols == other._rows && "First matrix columns must equal second matrix rows for multiplication");
+    Matrix result(_rows, other._cols);
+    for (int i = 0; i < _rows; ++i) {
+      for (int j = 0; j < other._cols; ++j) {
+        for (int k = 0; k < _cols; ++k) {
+          result(i, j) += (*this)(i, k) * other(k, j);
+        }
+      }
+    }
+    return result;
   }
 
   Matrix Matrix::operator*(const Matrix& other) const {

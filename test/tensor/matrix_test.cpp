@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "catch_amalgamated.hpp"
-#include "tensor/matrix.h"
+#include "tensor/matrix.hpp"
 
 using tensor::Matrix;
 using Catch::Approx;
@@ -49,7 +49,13 @@ TEST_CASE("Matrix scalar multiplication and division", "[matrix]") {
     REQUIRE(c(1,0) == Approx(3));
 }
 
-TEST_CASE("Matrix multiplication throws", "[matrix]") {
+TEST_CASE("Matrix multiplication", "[matrix]") {
     Matrix a(2, 2), b(2, 2);
-    REQUIRE_THROWS_AS(a * b, std::runtime_error);
+    a(0,0) = 2; a(0,1) = 4; a(1,0) = 6; a(1,1) = 8;
+    b(0,0) = 1; b(0,1) = 3; b(1,0) = 5; b(1,1) = 7;
+    Matrix c = a * b;
+    REQUIRE(c(0,0) == Approx(22));
+    REQUIRE(c(0,1) == Approx(34));
+    REQUIRE(c(1,0) == Approx(46));
+    REQUIRE(c(1,1) == Approx(74));
 }
