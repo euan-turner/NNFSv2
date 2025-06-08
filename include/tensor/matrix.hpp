@@ -70,16 +70,28 @@ namespace tensor {
       // element-wise subtraction
       Matrix sub(const Matrix& other) const;
       Matrix operator-(const Matrix& other) const;
+      // element-wise multiplication
+      Matrix hadamard(const Matrix& other) const;
+
       // scalar multiplication
       Matrix scalMul(const float& x) const;
       Matrix operator*(const float &x) const;
       // scalar division
       Matrix scalDiv(const float& x) const;
       Matrix operator/(const float &x) const;
-      // element-wise multiplication
-      Matrix hadamard(const Matrix& other) const;
+
       // matrix multiplication
       Matrix matMul(const Matrix& other) const;
       Matrix operator*(const Matrix& other) const;
+
+      // reduction
+      float sum() const;
+      float mean() const;
+      float max() const;
+
+      // 0 reduces rows, 1 reduces cols
+      std::vector<float> sum(int axis) const;
+      std::vector<float> mean(int axis) const;
+      std::vector<float> max(int axis) const;
   };
 };
